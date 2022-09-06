@@ -116,8 +116,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-###################################################################
-###################################################################
+###############################################################################
+###############################################################################
 ## Hanlan Yang Modified
 # Python3 Virtual Environment path
 export WORKON_HOME=$HOME/.virtualenvs
@@ -125,6 +125,13 @@ export PROJECT_HOME=$HOME/Projects
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # Alias
+alias rm='echo "DO NOT use rm! Use del instead. 
+If you really want, use with \ to bypass alias."; false'
+alias del=trash-put
+alias dells=trash-list
+alias delem=trash-empty
+alias delre=trash-restore
+alias delrm=trash-rm
 
 # Default
 export EDITOR='vim'

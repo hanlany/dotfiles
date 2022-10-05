@@ -125,8 +125,9 @@ export PROJECT_HOME=$HOME/Projects
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # Alias
-alias rm='echo "DO NOT use rm! Use del instead. 
-If you really want, use with \ to bypass alias."; false'
+# alias rm='echo "DO NOT use rm! Use del instead.
+# If you really want, use with \ to bypass alias."; false'
+alias rm="rm -i"
 alias del=trash-put
 alias dells=trash-list
 alias delem=trash-empty
@@ -135,7 +136,6 @@ alias delrm=trash-rm
 
 # Default
 export EDITOR='vim'
-
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -152,3 +152,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Ros setup
+source /opt/ros/noetic/setup.bash

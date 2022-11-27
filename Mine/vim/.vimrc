@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+""" Plugin Manager - vim-plug
 call plug#begin('~/.vim/plugged')
 
 " Color Scheme
@@ -34,6 +34,7 @@ Plug 'lervag/vimtex'
 
 " Code snippet tool (work together with coc-snippets)
 Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 
 " Automatically update tags so you can jump to label easily
 Plug 'ludovicchabant/vim-gutentags'
@@ -234,6 +235,7 @@ noremap <F3> :Autoformat<CR>
 
 "" VimTex Setting
 let g:tex_flavor = 'latex'
+let g:vimtex_view_method = 'zathura'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Language Specific

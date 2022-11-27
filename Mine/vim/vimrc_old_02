@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+""" Pluggin bundle (via vim-plug)
 call plug#begin('~/.vim/plugged')
 
 " Color Scheme
@@ -28,24 +28,6 @@ Plug 'simnalamburt/vim-mundo'
 
 " coc.nvim (Alternate Autocomplete)
 Plug 'neoclide/coc.nvim', {'branch': 'release' }
-
-" vim plugin for LaTeX
-Plug 'lervag/vimtex'
-
-" Code snippet tool (work together with coc-snippets)
-Plug 'honza/vim-snippets'
-
-" Automatically update tags so you can jump to label easily
-Plug 'ludovicchabant/vim-gutentags'
-
-" Handy git functions in vim
-Plug 'airblade/vim-gitgutter'
-
-" Plugin to change surround of texts
-Plug 'tpope/vim-surround'
-
-" Autoformat plugin
-Plug 'vim-autoformat/vim-autoformat'
 
 " vim-mark (Multiple highlights via <leader>m)
 Plug 'https://github.com/inkarkat/vim-mark'
@@ -228,13 +210,6 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-"" Autoformat setting
-" keymap for autoformat 
-noremap <F3> :Autoformat<CR>
-
-"" VimTex Setting
-let g:tex_flavor = 'latex'
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Language Specific
 "" Python
@@ -254,14 +229,12 @@ let g:pymode_recommended_style = 0
 """ General Setting
 "" Setting to let vim recognize Alt key (in gnome term) for more details
 "" check: https://stackoverflow.com/questions/6778961/alt-key-shortcuts-not-working-on-gnome-terminal-with-vim/10216459#10216459
-if empty($TERM_VSCODE)
-    let c='a'
-    while c <= 'z'
-      exec "set <A-".c.">=\e".c
-      exec "imap \e".c." <A-".c.">"
-      let c = nr2char(1+char2nr(c))
-    endw
-endif
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
 set ttimeout ttimeoutlen=50
 
 "" Color scheme + UI

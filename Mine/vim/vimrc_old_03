@@ -237,10 +237,6 @@ noremap <F3> :Autoformat<CR>
 let g:tex_flavor = 'latex'
 let g:vimtex_view_method = 'zathura'
 
-"" Ultisnips Settings
-" Fix tab conflicts with Coc tab
-let g:UltiSnipsExpandTrigger = "<C-`>"
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Language Specific
 "" Python
@@ -345,10 +341,6 @@ nnoremap <silent><A-S-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 " nnoremap <silent><A-S-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-
-"" Keybinding to move down in wrapped line (mainly for LaTex writing)
-nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
 "" Auto save
 "autocmd TextChanged,TextChangedI <buffer> silent write

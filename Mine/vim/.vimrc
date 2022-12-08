@@ -254,6 +254,10 @@ noremap <F3> :Autoformat<CR>
 
 "" VimTex Setting
 let g:tex_flavor = 'latex'
+let g:vimtex_quickfix_ignore_filters = [
+      \ 'Underfull',
+      \ 'Overfull',
+      \]
 if exists('$WSLENV')
     " For windows wsl (sumatrapdf.sh should be in dotfile git repo)
     " alias pdfview='/mnt/d/Users/mrjac/AppData/Local/SumatraPDF/SumatraPDF.exe'

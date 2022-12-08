@@ -9,11 +9,9 @@ Plug 'crusoexia/vim-monokai'
 Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'rafi/awesome-vim-colorschemes'
 
-" Vim status line (UI shows VIM status)
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-Plug 'itchyny/lightline.vim'
-Plug 'itchyny/vim-gitbranch'
+" Vim airline (UI shows VIM status)
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Nerdtree (Filetree navigator)
 Plug 'scrooloose/nerdtree'
@@ -89,27 +87,12 @@ call plug#end()
     source $VIM/vimfiles/arista.vim
 :endif
 
-
 " Put your own customizations below
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Plugin Setting
-"" Status line Setting
-" Airline
-" let g:airline_powerline_fonts=1
-" Lightline
-set laststatus=2
-set noshowmode
-let g:lightline = {
-    \ 'colorscheme': 'dracula',
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'gitbranch#name'
-    \ },
-    \ }
+"" Airline Setting
+let g:airline_powerline_fonts=1
 
 "" Mundo Setting
 set undofile
@@ -129,8 +112,6 @@ map <C-n> :NERDTreeToggle<CR>
 " set rtp+=~/.fzf
 
 "" COC Setting (from github repo)
-let g:coc_global_extensions = ['coc-snippets', 'coc-pairs', 'coc-prettier', 'coc-highlight', 'coc-vimtex', 'coc-java', 'coc-cmake', 'coc-pyright']
-"" Below is from github repo
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: There's always complete item selected by default, you may want to enable
 " no select by `"suggest.noselect": true` in your configuration file.
@@ -254,17 +235,7 @@ noremap <F3> :Autoformat<CR>
 
 "" VimTex Setting
 let g:tex_flavor = 'latex'
-if exists('$WSLENV')
-    " For windows wsl (sumatrapdf.sh should be in dotfile git repo)
-    " alias pdfview='/mnt/d/Users/mrjac/AppData/Local/SumatraPDF/SumatraPDF.exe'
-    let g:vimtex_view_general_viewer = '/mnt/d/Users/mrjac/AppData/Local/SumatraPDF/SumatraPDF.exe'
-    " let g:vimtex_view_general_viewer = 'sumatrapdf.sh'
-    let g:vimtex_view_general_options
-       \ = '-reuse-instance -forward-search @tex @line @pdf'
-else
-    " For ubuntu
-    let g:vimtex_view_method = 'zathura'
-endif
+let g:vimtex_view_method = 'zathura'
 
 "" Ultisnips Settings
 " Fix tab conflicts with Coc tab
@@ -309,17 +280,6 @@ syntax on
 set display=truncate
 set scrolloff=3
 set signcolumn=yes
-" Use a line cursor within insert mode and a block cursor everywhere else.
-" Reference chart of values:
-"   Ps = 0  -> blinking block.
-"   Ps = 1  -> blinking block (default).
-"   Ps = 2  -> steady block.
-"   Ps = 3  -> blinking underline.
-"   Ps = 4  -> steady underline.
-"   Ps = 5  -> blinking bar (xterm).
-"   Ps = 6  -> steady bar (xterm).
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
 
 "" Highlight/Search setting
 set bg=dark

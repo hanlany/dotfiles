@@ -147,6 +147,12 @@ alias delem=trash-empty
 alias delre=trash-restore
 alias delrm=trash-rm
 
+# check and set cpu mode
+alias checkcpumode="cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"
+alias setcpuPERF="echo 'performance' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"
+alias setcpuONDE="echo 'ondemand' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"
+alias setcpuPWSV="echo 'powersave' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"
+
 # Setting Environment Variables
 export EDITOR='vim'
 export TERM_PROGRAM='x-terminal-emulator'

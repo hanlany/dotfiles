@@ -1,8 +1,6 @@
-1:Go to Vundle, follow the instruction to install vundle.vim
+1:Go to vim-plug, follow the instruction to install vim-plug
 
-2:Use vim then run :PluginInstall
-
-3:Then check YoucompleteMe repo for compiling
+2:Use vim then run :PlugInstall
 
 # For the Markdown review plugin, make sure that run
     :call mkdp#util#install()

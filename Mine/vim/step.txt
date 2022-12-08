@@ -2,6 +2,8 @@
 
 2:Use vim then run :PlugInstall
 
+> 3: Make sure that current terminal has powerline for vim airline to show
+
 # For the Markdown review plugin, make sure that run
     :call mkdp#util#install()
 after PluginInstall. Check https://github.com/iamcco/markdown-preview.nvim for

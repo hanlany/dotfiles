@@ -1,0 +1,165 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" A minimize vim/nvim setting (no plugins)
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Language Specific
+"" Python
+let g:pymode_python = 'python'
+let g:pymode_trim_whitespaces = 0
+let g:pymode_recommended_style = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" General Setting
+"" Setting to let vim recognize Alt key (in gnome term) for more details
+"" check: https://stackoverflow.com/questions/6778961/alt-key-shortcuts-not-working-on-gnome-terminal-with-vim/10216459#10216459
+if has('nvim')
+else
+    if empty($TERM_VSCODE)
+        let c='a'
+        while c <= 'z'
+          exec "set <A-".c.">=\e".c
+          exec "imap \e".c." <A-".c.">"
+          let c = nr2char(1+char2nr(c))
+        endw
+    endif
+endif
+set ttimeout ttimeoutlen=50
+
+"" Directories managing
+set undofile
+if !has('win32')
+    if has('nvim')
+        set undodir=~/.config/nvim/undo//
+        set directory=~/.config/nvim/swap//
+        set backupdir=~/.config/nvim/backup//
+    else
+        if !isdirectory($HOME."/.vim/undo")
+            silent! execute "!mkdir -p ~/.vim/undo"
+        endif
+        if !isdirectory($HOME."/.vim/swap")
+            silent! execute "!mkdir -p ~/.vim/swap"
+        endif
+        if !isdirectory($HOME."/.vim/backup")
+            silent! execute "!mkdir -p ~/.vim/backup"
+        endif
+        set undodir=~/.vim/undo//
+        set directory=~/.vim/swap//
+        set backupdir=~/.vim/backup//
+    endif
+endif " Decide to let nvim do this implicitly for windows' VSCode nvim
+
+"" Color scheme + UI
+" colorscheme onedark
+" colorscheme dracula
+" colorscheme gruvbox
+" colorscheme archery
+" colorscheme iceberg
+set laststatus=2
+set noshowmode
+syntax on
+set display=truncate
+set scrolloff=3
+set signcolumn=yes
+" Use a line cursor within insert mode and a block cursor everywhere else.
+" Reference chart of values:
+"   Ps = 0  -> blinking block.
+"   Ps = 1  -> blinking block (default).
+"   Ps = 2  -> steady block.
+"   Ps = 3  -> blinking underline.
+"   Ps = 4  -> steady underline.
+"   Ps = 5  -> blinking bar (xterm).
+"   Ps = 6  -> steady bar (xterm).
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+"" Highlight/Search setting
+set bg=dark
+highlight Normal ctermbg=None
+highlight LineNr ctermbg=None
+highlight LineNr ctermfg=DarkGrey
+"hi Search ctermbg=Yellow ctermfg=Black
+set number
+set colorcolumn=80
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+" set cursorline
+
+"" Miscellaneous
+set mouse=a
+noremap <C-c> <Esc>
+set backspace=indent,eol,start
+set updatetime=250
+set showcmd
+set history=50
+set ruler
+set wildmenu " diplay completion matches in status line
+set wildmode=longest:list,full
+
+"" Tab setup
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+"" Indent Mapping
+vnoremap > >gv
+vnoremap < <gv
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+" Commented out for coc shift tab for last entry in Autocomplete
+" inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+"" Keybinds to Move arround the windows (tmux+vim)
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+"" Copy and paste
+" Windows and Mac
+noremap cc "*y
+" Linux
+noremap cy "+y
+noremap cp "+p
+
+"" Center search results
+nnoremap n nzz
+nnoremap N Nzz
+
+"" Keybinding to Insert new line without entering insert mode
+nnoremap <silent><A-S-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+" Commentd out since conflicted with <S-K> show doc
+" nnoremap <silent><A-S-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+"" Keybinding to move down in wrapped line (mainly for LaTex writing)
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+
+"" Auto save
+"autocmd TextChanged,TextChangedI <buffer> silent write
+
+"" Highligth trailing whitespace
+highlight ExtraWhitespace ctermbg=grey guibg=grey
+match ExtraWhitespace /\s\+$/
+
+"" Command
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+" Revert with: ":delcommand DiffOrig".
+if !exists(":DiffOrig")
+    command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+            \ | wincmd p | diffthis
+endif
+
+"" Source a global configuration file if available
+if filereadable('etc/vimrc/local')
+    source /etc/vimrc.local
+endif

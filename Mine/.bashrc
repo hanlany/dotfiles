@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+#~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -162,7 +162,11 @@ alias catc="catkin clean"
 alias make="time make -j16"
 
 # ssh alias
-alias sshshield="ssh -p 3467 -X hanlanyang@sbpl.net"
+alias sshomega="ssh -p 3467 -X hanlanyang@sbpl.net"
+alias sshshield="ssh -p 3467 -X shield@sbpl.net"
+
+# Alias for nvim
+alias nv="nvim"
 ###############################################################################
 
 # Setting Environment Variables

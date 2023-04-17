@@ -153,28 +153,22 @@ endfunction
 function! LightlineCocHints() abort
   return s:lightline_coc_diagnostic('hints', 'hint')
 endfunction
-autocmd User CocDiagnosticChange call lightline#update()
 
-"" Mundo Setting (include setting undo/swp/backup dir)
+autocmd User CocDiagnosticChange call lightline#update()
+" let g:lightline = {
+"     \ 'colorscheme': 'dracula',
+"     \ 'active': {
+"     \   'left': [ [ 'mode', 'paste' ],
+"     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+"     \ },
+"     \ 'component_function': {
+"     \   'gitbranch': 'gitbranch#name'
+"     \ },
+"     \ }
+
+"" Mundo Setting
 set undofile
-if has('nvim')
-    set undodir=~/.config/nvim/undo//
-    set directory=~/.config/nvim/swap//
-    set backupdir=~/.config/nvim/backup//
-else
-    if !isdirectory($HOME."/.vim/undo")
-        silent! execute "!mkdir -p ~/.vim/undo"
-    endif
-    if !isdirectory($HOME."/.vim/swap")
-        silent! execute "!mkdir -p ~/.vim/swap"
-    endif
-    if !isdirectory($HOME."/.vim/backup")
-        silent! execute "!mkdir -p ~/.vim/backup"
-    endif
-    set undodir=~/.vim/undo//
-    set directory=~/.vim/swap//
-    set backupdir=~/.vim/backup//
-endif
+set undodir=~/.vim/undo
 map <A-u> :MundoToggle<CR>
 
 "" NERDTree Setting
@@ -184,7 +178,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeShowHidden = 1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-map <A-n> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 
 "" FZF Setting (from package installed previously from git)
 " set rtp+=~/.fzf
@@ -354,16 +348,13 @@ let g:pymode_recommended_style = 0
 """ General Setting
 "" Setting to let vim recognize Alt key (in gnome term) for more details
 "" check: https://stackoverflow.com/questions/6778961/alt-key-shortcuts-not-working-on-gnome-terminal-with-vim/10216459#10216459
-if has('nvim')
-else
-    if empty($TERM_VSCODE)
-        let c='a'
-        while c <= 'z'
-          exec "set <A-".c.">=\e".c
-          exec "imap \e".c." <A-".c.">"
-          let c = nr2char(1+char2nr(c))
-        endw
-    endif
+if empty($TERM_VSCODE)
+    let c='a'
+    while c <= 'z'
+      exec "set <A-".c.">=\e".c
+      exec "imap \e".c." <A-".c.">"
+      let c = nr2char(1+char2nr(c))
+    endw
 endif
 set ttimeout ttimeoutlen=50
 

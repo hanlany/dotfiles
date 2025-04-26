@@ -1,6 +1,6 @@
 " From VIM
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = $runtimepath
+" let &packpath = $runtimepath
 
 " Settings
 let g:loaded_perl_provider = 0
@@ -11,3 +11,5 @@ if exists('g:vscode')
 else
     source ~/.vimrc
 endif
+
+" source ~/.vimrc

@@ -129,6 +129,9 @@ fi
 ###############################################################################
 ###############################################################################
 ## Hanlan Yang Modified
+# Setting Environment Variables
+export EDITOR='vim'
+export TERM_PROGRAM='x-terminal-emulator'
 # True color term override
 export TERM=xterm-256color
 export COLORTERM=truecolor
@@ -143,6 +146,15 @@ PROMPT_DIRTRIM=2
 
 # Alias
 ###############################################################################
+# Alias for git
+alias gits="git status -sb"
+alias gitco="git checkout"
+alias gitbr="git branch"
+alias gitci="git commit"
+alias gitst="git stash"
+alias gitlg="git log --oneline --graph --decorate --all"
+alias gitlast="git log -1 HEAD --stat"
+
 # alias rm='echo "DO NOT use rm! Use del instead.
 # If you really want, use with \ to bypass alias."; false'
 alias rm="rm -i"
@@ -161,10 +173,6 @@ alias nv="nvim"
 # Alias for tmux
 alias tmux="tmux -2u"
 ###############################################################################
-
-# Setting Environment Variables
-export EDITOR='vim'
-export TERM_PROGRAM='x-terminal-emulator'
 
 # >>> Codex installer >>>
 export PATH="/root/.local/bin:$PATH"

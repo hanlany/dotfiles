@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+#~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -129,6 +129,13 @@ fi
 ###############################################################################
 ###############################################################################
 ## Hanlan Yang Modified
+# Setting Environment Variables
+export EDITOR='vim'
+#export TERM_PROGRAM='x-terminal-emulator'
+# True color term override
+export TERM=xterm-256color
+export COLORTERM=truecolor
+
 # Bash mod
 PROMPT_DIRTRIM=2
 
@@ -139,6 +146,15 @@ source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # Alias
 ###############################################################################
+# Alias for git
+alias gits="git status -sb"
+alias gitco="git checkout"
+alias gitbr="git branch"
+alias gitci="git commit"
+alias gitst="git stash"
+alias gitlg="git log --oneline --graph --decorate --all"
+alias gitlast="git log -1 HEAD --stat"
+
 # alias rm='echo "DO NOT use rm! Use del instead.
 # If you really want, use with \ to bypass alias."; false'
 alias rm="rm -i"
@@ -162,12 +178,27 @@ alias catc="catkin clean"
 alias make="time make -j16"
 
 # ssh alias
-alias sshshield="ssh -p 3467 -X hanlanyang@sbpl.net"
-###############################################################################
+alias sshomega="ssh -X hanlanyang@172.26.42.106"
+alias sshshield="ssh -X shield@172.26.42.106"
 
-# Setting Environment Variables
-export EDITOR='vim'
-export TERM_PROGRAM='x-terminal-emulator'
+# Alias for nvim
+alias nv="nvim"
+
+# Alias for tmux
+alias tmux="tmux -2u"
+
+# Alias for docker
+alias dockb_apt_ctp='docker build -t apt_ctp_docker -f /home/hanlany/code/ctp_shield_ws/Dockerfile.apt /home/hanlany/code/ctp_shield_ws/'
+alias dockb_src_ctp='docker build -t src_ctp_docker -f /home/hanlany/code/ctp_shield_ws/Dockerfile.src /home/hanlany/code/ctp_shield_ws/'
+alias dockr_apt_ctp='docker run -it --network host \
+    -v /home/hanlany/code/ctp_shield_ws/:/ws \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+    apt_ctp_docker'
+alias dockr_src_ctp='docker run -it --network host -v /home/hanlany/code/ctp_shield_ws/:/ws src_ctp_docker'
+
+# Alias for git
+alias giturl='git ls-remote --get-url origin'
+###############################################################################
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -186,10 +217,28 @@ unset __conda_setup
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Ros setup
-source /opt/ros/noetic/setup.bash
 
 # Tex Live PATH setting 
 PATH=/usr/local/texlive/2022/bin/x86_64-linux:$PATH; export PATH
 MANPATH=/usr/local/texlive/2022/texmf-dist/doc/man:$MANPATH; export MANPATH
 INFOPATH=/usr/local/texlive/2022/texmf-dist/doc/info:$INFOPATH; export INFOPATH
+
+# Setting cuda path
+export PATH=/usr/local/cuda-12.9/bin${PATH:+:${PATH}}
+alias omni_python='~/.local/share/ov/pkg/isaac_sim-2022.2.1/python.sh'
+
+# Mujoco Setup
+# export LD_LIBRARY_PATH=/home/hanlany/.mujoco/mujoco-2.3.2/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/hanlany/.mujoco/mujoco210/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia
+export PATH="$LD_LIBRARY_PATH:$PATH" 
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so
+
+# Libtorch setup
+# export LIBTORCH=/usr/local/libtorch
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/libtorch/lib
+
+# Ros setup
+source /opt/ros/noetic/setup.bash
+
+source ~/code/manipulation_ws/devel/setup.bash

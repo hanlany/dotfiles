@@ -131,7 +131,7 @@ fi
 ## Hanlan Yang Modified
 # Setting Environment Variables
 export EDITOR='vim'
-export TERM_PROGRAM='x-terminal-emulator'
+#export TERM_PROGRAM='x-terminal-emulator'
 # True color term override
 export TERM=xterm-256color
 export COLORTERM=truecolor

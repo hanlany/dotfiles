@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -129,13 +129,17 @@ fi
 ###############################################################################
 ###############################################################################
 ## Hanlan Yang Modified
+# True color term override
+export TERM=xterm-256color
+export COLORTERM=truecolor
+
 # Bash mod
 PROMPT_DIRTRIM=2
 
 # Python3 Virtual Environment path
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Projects
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+# export WORKON_HOME=$HOME/.virtualenvs
+# export PROJECT_HOME=$HOME/Projects
+# source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # Alias
 ###############################################################################
@@ -148,52 +152,20 @@ alias delem=trash-empty
 alias delre=trash-restore
 alias delrm=trash-rm
 
-# check and set cpu mode/boost
-alias checkcpumode="cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"
-alias setcpuPERF="echo 'performance' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"
-alias setcpuONDE="echo 'ondemand' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"
-alias setcpuPWSV="echo 'powersave' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"
-alias setcpuBOOSTON="echo '1' | sudo tee /sys/devices/system/cpu/cpufreq/boost"
-alias setcpuBOOSTOFF="echo '0' | sudo tee /sys/devices/system/cpu/cpufreq/boost"
-
 # Alias shortcut for build
-alias catb="catkin build"
-alias catc="catkin clean"
-alias make="time make -j16"
-
-# ssh alias
-alias sshomega="ssh -p 3467 -X hanlanyang@sbpl.net"
-alias sshshield="ssh -p 3467 -X shield@sbpl.net"
+alias make="time make -j4"
 
 # Alias for nvim
 alias nv="nvim"
+
+# Alias for tmux
+alias tmux="tmux -2u"
 ###############################################################################
 
 # Setting Environment Variables
 export EDITOR='vim'
 export TERM_PROGRAM='x-terminal-emulator'
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/hanlany/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/hanlany/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/hanlany/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/hanlany/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# Ros setup
-source /opt/ros/noetic/setup.bash
-
-# Tex Live PATH setting 
-PATH=/usr/local/texlive/2022/bin/x86_64-linux:$PATH; export PATH
-MANPATH=/usr/local/texlive/2022/texmf-dist/doc/man:$MANPATH; export MANPATH
-INFOPATH=/usr/local/texlive/2022/texmf-dist/doc/info:$INFOPATH; export INFOPATH
+# >>> Codex installer >>>
+export PATH="/root/.local/bin:$PATH"
+# <<< Codex installer <<<

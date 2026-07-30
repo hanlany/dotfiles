@@ -177,5 +177,5 @@ alias tmux="tmux -2u"
 
 # This should be auto add by codex install (run install.sh for bash before that)
 # >>> Codex installer >>>
-# export PATH="/root/.local/bin:$PATH"
+export PATH="/root/.local/bin:$PATH"
 # <<< Codex installer <<<

@@ -153,6 +153,7 @@ alias gitbr="git branch"
 alias gitci="git commit"
 alias gitst="git stash"
 alias gitlg="git log --oneline --graph --decorate --all"
+alias gitlf="git log -p --follow"
 alias gitlast="git log -1 HEAD --stat"
 
 # alias rm='echo "DO NOT use rm! Use del instead.

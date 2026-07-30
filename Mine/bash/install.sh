@@ -22,13 +22,16 @@ fi
 
 if [[ -e "$home_bashrc" || -L "$home_bashrc" ]]; then
     if [[ -e "$backup_bashrc" || -L "$backup_bashrc" ]]; then
-        printf 'Error: backup already exists: %s\n' "$backup_bashrc" >&2
-        printf 'Move or remove it before running this installer again.\n' >&2
-        exit 1
+        printf 'Backup already exists: %s\n' "$backup_bashrc"
+        printf 'Overwrite %s with %s? [y/N] ' "$home_bashrc" "$source_bashrc"
+        if ! read -r reply || [[ ! "$reply" =~ ^[Yy]([Ee][Ss])?$ ]]; then
+            printf 'Installation cancelled; no files were changed.\n'
+            exit 0
+        fi
+    else
+        mv -- "$home_bashrc" "$backup_bashrc"
+        printf 'Backed up %s to %s\n' "$home_bashrc" "$backup_bashrc"
     fi
-
-    mv -- "$home_bashrc" "$backup_bashrc"
-    printf 'Backed up %s to %s\n' "$home_bashrc" "$backup_bashrc"
 fi
 
 cp -- "$source_bashrc" "$home_bashrc"
